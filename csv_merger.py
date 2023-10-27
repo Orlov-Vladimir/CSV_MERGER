@@ -14,8 +14,9 @@ file.close()
 
 list_res = []
 i = 0
+m = min(len(list_1), len(list_2), len(list_3))
 
-while i < 10:
+while i < m:
     for first_string in list_1[0]:
         list_res.append(first_string)
         del list_1[0]
