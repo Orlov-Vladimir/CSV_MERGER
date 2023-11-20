@@ -1,0 +1,24 @@
+1. Создаем папку "load": 
+sudo mkdir /load
+
+2. Монтируем в созданную папку общий диск с Jmeter и заглушками:
+sudo mount -t nfs4 loadgen-10.bill-intload.cloud.vimpelcom.ru:/load /load
+
+3. Устанавливаем JRE:
+sudo apt install openjdk-17-jre
+
+4. Прописываем переменную пути к Jmeter:
+export PATH="$PATH:/load/apache-jmeter-5.6.2/bin"
+source ~/.profile
+
+5. Убираем ограничение на порты генератора:
+sudo nano /etc/sysctl.conf
+добавляем в конец файла строчку net.ipv4.tcp_tw_reuse = 1
+сохраняем файл.
+Проверяем: sudo sysctl -p
+
+6. Теперь можем запускать тест-планы (на 2000 тпс максимум) командой:
+jmeter -n -t /load/test_plans/имя_тест_плана.jmx -l /load/results/имя_тест_плана.csv -j /load/results/имя_тест_плана.jtl >> /load/results/имя_тест_плана_console_output.stat
+
+которые предварительно со своей локальной машины скопировали на генератор командой:
+scp /c/Users/VlROrlov/Desktop/Скрипты\ Jmeter/имя_тест_плана.jmx load@loadgen-10.bill-intload.cloud.vimpelcom.ru:/load/test_plans/имя_тест_плана.jmx
