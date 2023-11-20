@@ -1,0 +1,116 @@
+Простая заглушка для Comverse.
+Заглушка построена с помощью сервиса Bee Load Mock (https://confluence.veon.com/pages/viewpage.action?spaceKey=QAAT&title=Bee+Load+Mock).
+Заглушка принимает входящие сообщения и отвечает заданными сообщениями, в зависимости от параметров запроса.
+Содержимое редактируемых файлов заглушки:
+•	Содержимое файла config.json:
+{
+    "port": "8443",
+    "mocks_folder": "/load/blmockAuth/mocks",
+    "enable_https": false,
+    "pub_key_path": "cert1.pem",
+    "priv_key_path": "private1.key",
+    "file_log": true,
+    "log_level": "debug"
+}
+
+___________________________________________
+
+•	Содержимое файла ****.gfrup:
+{
+    "mock_name": "Comverse_authorization",
+    "mock_method": "POST",
+    "mock_path": "SAMLSignOnWS",
+    "path_params": [],
+    "mapping_vars" : [],
+    "responses_list": [
+        {
+            "match_mapping_vars": [],
+            "extract_queris_to_var": [],
+            "response_code": 200,
+            "sleep_min": 1000,
+            "sleep_max": 1000,
+            "headers_list": [
+                {
+                        "header_name": "Content-Type",
+                        "header_value": "text/xml;charset=UTF-8"
+                }
+            ],
+            "variables_list": [],
+            "body": "<env:Envelope xmlns:env=\"http:\/\/schemas.xmlsoap.org\/soap\/envelope\/\">\r\n\t\t\t\t\t <env:Header\/>\r\n\t\t\t\t\t <env:Body>\r\n\t\t\t\t\t <ns1:proxyLoginResponse
+xmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\" xmlns:ns1=\"https:\/\/org.comverse.rtbd.sec\/webservice\/auth\">\r\n\t\t\t\t\t <result><![CDATA[<?xml version=\"1.0\"?>\r\n\t\t\t
+\t\t <Response\r\n\t\t\t\t\t xmlns=\"https:\/\/org.comverse.rtbd.sec\/webservice\/auth\">\r\n\t\t\t\t\t <Token>TOKEN<\/Token>\r\n\t\t\t\t\t <TimeOut>\r\n\t\t\t\t\t <SoftTimer>31536000000<\/
+SoftTimer>\r\n\t\t\t\t\t <HardTimer>31536000000<\/HardTimer>\r\n\t\t\t\t\t <SoftTimeout>Jun 18, 2024 2:37:15 PM<\/SoftTimeout>\r\n\t\t\t\t\t <HardTimeout>Jun 12, 2024 10:12:24 AM<\/HardTime
+out>\r\n\t\t\t\t\t <\/TimeOut>\r\n\t\t\t\t\t <\/Response>]]><\/result>\r\n\t\t\t\t\t <\/ns1:proxyLoginResponse>\r\n\t\t\t\t\t <\/env:Body>\r\n\t\t\t\t\t <\/env:Envelope>"
+        }
+    ]
+}
+
+
+ЛИБО:
+___________________________________________
+{
+    "mock_name": "Comverse_Get_Ansver",
+    "mock_method": "POST",
+    "mock_path": "services",
+    "path_params": [],
+    "mapping_vars" : [],
+    "responses_list": [
+        {
+            "match_mapping_vars": [],
+            "extract_queris_to_var": [],
+            "response_code": 200,
+            "sleep_min": 1000,
+            "sleep_max": 1000,
+            "headers_list": [
+                {
+                        "header_name": "Content-Type",
+                        "header_value": "text/xml;charset=UTF-8"
+                }
+            ],
+            "variables_list": [],
+            "body": "<soapenv:Envelope xmlns:q0=\"http:\/\/www.comverse.com\" xmlns:soapenv=\"http:\/\/schemas.xmlsoap.org\/soap\/envelope\/\" xmlns:xsd=\"http:\/\/www.w3.org\/2001\/XMLSche
+ma\" xmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\"><soapenv:Body xmlns:xs=\"http:\/\/www.w3.org\/2001\/XMLSchema\"><q0:SubscriberRetrieveHistoryResponse xsi:schemaLocation=\"h
+ttp:\/\/www.w3.org\/2001\/XMLSchema\"><q0:output><productVersion>CCBS3.0<\/productVersion><serverId>1<\/serverId><ServerIdLocator><billingServerId>1<\/billingServerId><ratingServerId>1<\/ra
+tingServerId><\/ServerIdLocator><totalCount>0<\/totalCount><output><mtrHistory><attribs>0<\/attribs><mtrId changed=\"false\" set=\"true\"><value>860056786<\/value><\/mtrId><mtrId2 changed=\
+"false\" set=\"true\"><value>9556999<\/value><\/mtrId2><accountInternalId changed=\"false\" set=\"true\"><value>0<\/value><\/accountInternalId><accuInfo changed=\"false\" set=\"true\"><valu
+e>[330~0~0][331~0~0][909~0~0][1017~0~0][1073~0~0][1526~0~0][1532~0~0][1533~0~0][1573~0~0][1275~0~0][14~17620.4157~0][370~0~0][818~0~0][819~0~0][837~0~0][820~0~0][836~0~0]<\/value><\/accuInf
+o><balInfo changed=\"false\" set=\"true\"><value>[1~15554~0~~0~1][5~0~0~2033-02-06 00:00:00~0~1][6~0~0~2033-02-06 00:00:00~0~1][8~0~0~~0~1][10~999~0~2033-02-06 00:00:00~0~1][12~60~0~~0~1][1
+3~300~0~2033-02-06 00:00:00~0~1][14~98500~0~2033-02-06 00:00:00~0~1][15~760~0~2033-02-06 00:00:00~0~1][16~0~0~2033-02-06 00:00:00~0~1][17~1000~0~~0~1][20~333~0~~0~1][201~9999999.9999~0~~~1]
+[202~9999999999999~0~~~1][203~9999999999999~0~~~1][204~9999999999999~0~~~1][207~9999999999999~0~~~1][209~9999999999999~0~~~1][211~9999999999999~0~~~1][218~9999999999999~0~~~1][219~99999999~
+0~~~1][2~0~0~~0~1][3~0~0~~0~1][4~0~0~~0~1][7~0~0~~0~1][9~0~0~~0~1][11~0~0~~0~1][18~0~0~~0~1][19~0~0~~0~1]<\/value><\/balInfo><balanceGrantId changed=\"false\" set=\"true\"><value xsi:nil=\"
+true\"\/><\/balanceGrantId><billingServerId changed=\"false\" set=\"true\"><value>1<\/value><\/billingServerId><bonusAwarded changed=\"false\" set=\"true\"><longValue xsi:nil=\"true\"\/><va
+lue xsi:nil=\"true\"\/><\/bonusAwarded><bonusPlanId changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/bonusPlanId><chargeAmount changed=\"false\" set=\"true\"><longValue xsi:nil=\
+"true\"\/><value xsi:nil=\"true\"\/><\/chargeAmount><chargeCode changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/chargeCode><chargeInfo xsi:nil=\"true\"\/><conversionRate changed
+=\"false\" set=\"true\"><longValue xsi:nil=\"true\"\/><value xsi:nil=\"true\"\/><\/conversionRate><discountAwarded changed=\"false\" set=\"true\"><longValue xsi:nil=\"true\"\/><value xsi:ni
+l=\"true\"\/><\/discountAwarded><discountItemId changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/discountItemId><extField changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/
+><\/extField><fundUsageType changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/fundUsageType><grantAmount changed=\"false\" set=\"true\"><longValue xsi:nil=\"true\"\/><value xsi:ni
+l=\"true\"\/><\/grantAmount><grantId changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/grantId><groupAccountInfo changed=\"false\" set=\"true\"><value>79039613849<\/value><\/group
+AccountInfo><groupAccountType changed=\"false\" set=\"true\"><value>3<\/value><\/groupAccountType><loginName changed=\"false\" set=\"true\"><value>EXP_BALS<\/value><\/loginName><modDate cha
+nged=\"false\" set=\"true\"><value>2023-11-01T00:34:16+03:00<\/value><\/modDate><modDateSubTz changed=\"false\" set=\"true\"><value>2023-11-01T00:34:16+03:00<\/value><\/modDateSubTz><mogId
+changed=\"false\" set=\"true\"><value>4<\/value><\/mogId><mtrComment changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/mtrComment><mtrSource changed=\"false\" set=\"true\"><value>
+1<\/value><\/mtrSource><mtrSubType changed=\"false\" set=\"true\"><value>2<\/value><\/mtrSubType><mtrType changed=\"false\" set=\"true\"><value>5<\/value><\/mtrType><offerInfo changed=\"fal
+se\" set=\"true\"><value>[3245][3347][5374][5420]<\/value><\/offerInfo><owningAccountInternalId xsi:nil=\"true\"\/><prevSubscriberCurrency changed=\"false\" set=\"true\"><value xsi:nil=\"tr
+ue\"\/><\/prevSubscriberCurrency><rcCycleDuration xsi:nil=\"true\"\/><resellerId changed=\"false\" set=\"true\"><value>0<\/value><\/resellerId><serviceInternalId changed=\"false\" set=\"tru
+e\"><value>232877096<\/value><\/serviceInternalId><serviceInternalIdResets changed=\"false\" set=\"true\"><value>0<\/value><\/serviceInternalIdResets><subscriberCurrency changed=\"false\" s
+et=\"true\"><value>RUR<\/value><\/subscriberCurrency><targetServiceInternalId changed=\"false\" set=\"true\"><value>232877052<\/value><\/targetServiceInternalId><targetServiceInternalIdRese
+ts changed=\"false\" set=\"true\"><value>0<\/value><\/targetServiceInternalIdResets><timezone changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/timezone><unitTypeId changed=\"fals
+e\" set=\"true\"><value xsi:nil=\"true\"\/><\/unitTypeId><writeoffAmount changed=\"false\" set=\"true\"><longValue xsi:nil=\"true\"\/><value xsi:nil=\"true\"\/><\/writeoffAmount><caExternal
+Id changed=\"false\" set=\"true\"><value xsi:nil=\"true\"\/><\/caExternalId><pleFlag changed=\"false\" set=\"true\"><value>false<\/value><\/pleFlag><chargeCodeDisplayValue xsi:nil=\"true\"\
+/><pclFlag changed=\"false\" set=\"true\"><value>0<\/value><\/pclFlag><accumulatorInfoHelper\/><balanceInfoHelper\/><offerInfoHelper\/><\/mtrHistory><\/output><\/q0:output><\/q0:SubscriberR
+etrieveHistoryResponse><\/soapenv:Body><\/soapenv:Envelope>"
+        }
+    ]
+}
+___________________________________________
+
+
+Параметризация ответов заглушки построена на изменяемом значении поля «startDateTime» в запросе. 
+Символы часов и минут времени в значении данного поля, к примеру «2023-10-31T02:00:00.000Z», дают команду ответить кодом 200 и соответствующей формой сообщения.
+
+Необходимо использовать запускающие файлы версии 1.1.0!
+
+
+
+
+
+
