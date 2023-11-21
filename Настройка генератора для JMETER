@@ -8,7 +8,11 @@ sudo mount -t nfs4 loadgen-10.bill-intload.cloud.vimpelcom.ru:/load /load
 sudo apt install openjdk-17-jre
 
 4. Прописываем переменную пути к Jmeter:
+Прописываем в файл .profile:
+nano .profile
+В самый конец файла добавляем строку:
 export PATH="$PATH:/load/apache-jmeter-5.6.2/bin"
+Потом в терминале:
 source ~/.profile
 
 5. Убираем ограничение на порты генератора:
